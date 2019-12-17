@@ -31,10 +31,13 @@ Possible arguments are:
 - -v                    Increase verbosity (show additional info)
 
 ## Credits
-Everyone in the group contributed to the making of this project.
+Everyone in the group contributed to the making of this project. We are: https://github.com/barbaradanzo, https://github.com/xuelanli, https://github.com/PitNox, https://github.com/teorad, https://github.com/klaus108
+The project  is inspired by some code taken from: https://github.com/swdevel-lab-h-farm-2019/birthdays
 
 ## License
 Apache License
 Version 2.0, January 2004
 http://www.apache.org/licenses/
+The Apache License is a non-copyleft free software license written by the Apache Software Foundation (ASF) that obliges users to preserve the copyright notice and disclaimer in modified versions.
+
 
