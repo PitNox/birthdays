@@ -1,15 +1,13 @@
 import unittest
 import birthdays
-import os
+
 
 class TestBirthdays(unittest.TestCase):
     
-    def setUp(self):
-        self.temporary_file = "/tmp/emptyfile"
-        f = open(self.temporary_file, 'w')
-        f.close()
+    def setUp(self):  # Run this before each test, make sure the input is not a digit
+        self.not_number = not_digit()      
   
-    def test_reject_name_if_lower_case(self):
+    def test_reject_name_if_lower_case(self):  # Reject the lower-case names
         #Assume
         name = "donald trump"
 
@@ -17,9 +15,10 @@ class TestBirthdays(unittest.TestCase):
         result = birthdays.name_is_valid(name)
 
         #Assert
+        self.assertEqual(self.not_number, True)
         self.assertFalse(result)
 
-    def test_reject_name_if_too_long(self):
+    def test_reject_name_if_too_long(self):  # Reject names longer than 20 char
         #Assume
         name = "Thisnameexceedstwentycharacters"
 
@@ -29,7 +28,7 @@ class TestBirthdays(unittest.TestCase):
         #Assert
         self.assertFalse(result)
 
-    def test_accept_name_if_in_birthdays(self):
+    def test_accept_name_if_in_birthdays(self): # Consider valid the names present in dictionary
         #Assume
         name = 'Donald Trump'
 
@@ -39,7 +38,7 @@ class TestBirthdays(unittest.TestCase):
         #Assert
         self.assertTrue(result)
 
-    def test_just_the_surname(self):
+    def test_just_the_surname(self):  # Test the surname of a given name
         #Assume
         name = 'Albert Einstein'
 
@@ -49,9 +48,8 @@ class TestBirthdays(unittest.TestCase):
         #Assert
         self.assertEqual(result,"Einstein")
 
-    def tearDown(self):
-        os.remove(self.temporary_file)
-
+    def tearDown(self):  # Run this after each test
+        self.not_number = None
 
 
 if __name__ == '__main__':       # When running the module directly, run the code within the conditional
