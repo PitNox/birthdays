@@ -1,5 +1,5 @@
 """This is the main code for the project Birthdays. The code is based on an
-SQLite databse to check for user authentication and a python function with 
+SQLite databse to check for user authentication and a python function with
 the arparse module to return the desired information"""
 
 import sqlite3
@@ -12,8 +12,8 @@ import csv
 
 
 conn = sqlite3.connect('script/pwd.db')
-
 cursor = conn.cursor()
+
 
 def parse_args():
     """collecting user input into arguments with argparse module"""
@@ -48,6 +48,9 @@ def check_for_username(username, password):
 
     global cursor
 
+    if args.v is True:
+        print ("authenticating user...")
+
     digest = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
     rows = cursor.execute('''SELECT * FROM user WHERE username=? and
@@ -57,9 +60,15 @@ def check_for_username(username, password):
 
     if str(username) in str(results):
 
+        if args.v is True:
+            print ("user authenticated. Welcome " + args.c + ". ")
+
         if results:
 
             conn.commit()
+
+            if args.v is True:
+                print ("fetching birthday data...")
 
             with open(filename) as f:
 
@@ -69,9 +78,8 @@ def check_for_username(username, password):
 
                     if row['name'] == args.n:
 
-                        print ('Welcome ' + args.c + ', the birthday of '
-                               + args.n
-                               + ' is: ' + row['date_birth'])
+                        print ('The birthday of ' + args.n +
+                               ' is: ' + row['date_birth'])
 
         else:
             print('Name is not present, or password is invalid')
@@ -82,20 +90,13 @@ def check_for_username(username, password):
 
 args = parse_args()
 
-if args.c and args.p:
-
-    check_for_username(args.c, args.p)
-
-if args.v is True:
-
-    print ('''This program returns the birthday of a famous person
-           specified by the user. Note that the program will
-           only return the birthday of people present in the
-           'Data_file.csv'database. To use first run
-           'script/dbmanager.py', then run main.py using python.
-           Arguments are: -a: add username; -p: add password or check
-           password (required); -c: check username; -v: turn on
-           verbosity; n- in quotation marks, add name of
-           person to research.''')
-
-conn.close()
+if args.n:
+    if args.c and args.p:
+        print ("")
+        check_for_username(args.c, args.p)
+        print ("")
+else:
+    print ("")
+    print ("Please insert -n argument 'name' as follows: -n '*name*' ")
+    print ("")
+    conn.close()
