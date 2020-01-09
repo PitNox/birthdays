@@ -14,7 +14,11 @@ You can find a file called main.py that will authenticate the user and return th
 
 ## Installing
 First step is to open the dbmanager.py file in the "script" folder.
-Running the file with a python interpreter will create the SQLite database that will be containing passwords and usernames.
+Please run the file from the "birthdays" repository, else later the script will not ba able to find the database.
+
+    Usage --> python script/dbmanager.py -a *username* -p *password*
+
+This code will create the SQLite database that will be containing passwords and usernames.
 Run it with a python interpreter, adding arguments
 - -a <username>         Save <username> as a new user for the system
 - -p <password>         Save <password> as password for the user -a
